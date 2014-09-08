@@ -92,7 +92,7 @@ $('<button></button>').button();
 
 Extends a plugin using the `Plugin` prototype. Creates a Zepto plugin interface function.
 
-| Parameter name | Description |
+| Parameter&nbsp;name | Description |
 |----------------|-------------|
 | **name** | The name of the plugin, in lowercase. |
 | **ctor** | The constructor of the plugin we want to extend. | 
