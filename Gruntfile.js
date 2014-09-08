@@ -31,12 +31,9 @@ module.exports = function(grunt) {
         'grunt-contrib-uglify',
         'grunt-contrib-watch',
         'grunt-contrib-connect',
-        'grunt-css',
         'grunt-shell',
         'grunt-contrib-clean',
         'grunt-contrib-copy',
-        'grunt-autoprefixer',
-        'grunt-contrib-sass',
         'grunt-mocha-phantomjs'
     ];
 
@@ -47,7 +44,7 @@ module.exports = function(grunt) {
     });
 
     grunt.registerTask('serve', ['build-dist', 'connect:server', 'watch']);
-    grunt.registerTask('build-dist', ['copy', 'uglify', 'sass', 'autoprefixer', 'cssmin']);
+    grunt.registerTask('build-dist', ['copy', 'uglify']);
     grunt.registerTask('release', ['test', 'shell:tagRelease']);
     grunt.registerTask('test', ['build-dist', 'connect:test', 'mocha_phantomjs']);
     grunt.registerTask('test:browser', ['build-dist', 'connect:test:keepalive']);
