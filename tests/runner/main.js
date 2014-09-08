@@ -8,7 +8,8 @@ require(['config'], function() {
         function(require, chai, mocha) {
 
             var tests = [
-                '../../tests/unit/factory.js'
+                '../../tests/unit/factory.js',
+                '../../tests/unit/plugin.js'
             ];
 
             require(tests, function() {
