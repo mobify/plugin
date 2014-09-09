@@ -25,11 +25,11 @@
     };
 
     $.extend(true, $, {
-        plugin: function(name, ctor, prototype) {
-            ctor._super = Plugin;
-            ctor.prototype = $.extend(true, Plugin.prototype, prototype);
-            ctor.prototype.constructor = ctor;
-            ctor.prototype.name = name;
+        plugin: function(name, SubConstructor, prototype) {
+            SubConstructor._super = Plugin;
+            SubConstructor.prototype = $.extend(true, Plugin.prototype, prototype);
+            SubConstructor.prototype.constructor = SubConstructor;
+            SubConstructor.prototype.name = name;
 
             $.fn[name] = function(option) {
                 var args = Array.prototype.slice.call(arguments);
@@ -45,7 +45,7 @@
                         if (isMethodCall) {
                             throw 'cannot call methods on "' + name + '" prior to initialization; attempted to call method "' + option + '"';
                         }
-                        $this.data(name, (plugin = new ctor(this, option)));
+                        $this.data(name, (plugin = new SubConstructor(this, option)));
                     }
 
                     // invoke a public method on plugin, and skip private methods
@@ -59,7 +59,7 @@
                 });
             };
 
-            $.fn[name].Constructor = ctor;
+            $.fn[name].Constructor = SubConstructor;
         },
         noop: function() {}
     });
