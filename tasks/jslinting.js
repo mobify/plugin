@@ -1,6 +1,6 @@
 module.exports = {
     targets: [
-        'src/js/bellows.js'
+        'src/js/plugin.js'
     ],
     excludes: []
 };
