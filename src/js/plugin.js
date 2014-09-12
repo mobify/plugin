@@ -17,6 +17,11 @@
 }(function($) {
     function Plugin(element, options, defaultOptions) {
         this.options = $.extend(true, {}, defaultOptions, options);
+
+        if (typeof this._init !== 'function') {
+            throw this.name + ' needs an _init method';
+        }
+
         this._init(element);
     }
 
