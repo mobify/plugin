@@ -1,0 +1,2 @@
+1.1.0
+	- Added check to determine if _init method is defined on plugin construction
