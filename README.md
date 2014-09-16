@@ -3,6 +3,8 @@ Mobify Plugin Factory
 
 A generic plugin factory method for creating Mobify plugins.
 
+[![Bower version](https://badge.fury.io/bo/plugin.svg)](http://badge.fury.io/bo/plugin)
+
 ## Requirements
 
 * [Zepto](http://zeptojs.com/)
