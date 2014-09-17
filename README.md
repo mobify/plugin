@@ -3,6 +3,9 @@ Mobify Plugin Factory
 
 A generic plugin factory method for creating Mobify plugins.
 
+[![Bower version](https://badge.fury.io/bo/plugin.svg)](http://badge.fury.io/bo/plugin)
+[![Circle CI](https://circleci.com/gh/mobify/plugin/tree/master.png?style=shield&circle-token=9347fa0140425cd2d9098cfcf58f3dfd54ccdca5)](https://circleci.com/gh/mobify/plugin/tree/master)
+
 ## Requirements
 
 * [Zepto](http://zeptojs.com/)
