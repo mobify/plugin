@@ -1,7 +1,7 @@
 define([
     '$',
     'plugin'
-], function($) {
+], function($, Plugin) {
     var element;
 
     describe('Plugin factory', function() {
@@ -9,24 +9,24 @@ define([
             element = $('<div class="subplugin" />');
         });
 
-        describe('Plugin extension', function() {
+        describe('Plugin create', function() {
 
-            it('creates plugin Zepto extension', function() {
-                assert.isDefined($.plugin);
+            it('creates create function', function() {
+                assert.isDefined(Plugin.create);
             });
 
-            it('creates plugin Zepto extension as a function', function() {
-                assert.isFunction($.plugin);
+            it('creates Plugin.create as a function', function() {
+                assert.isFunction(Plugin.create);
             });
         });
 
         describe('Plugin creation', function() {
             it('extends sub-object prototype with the name property', function() {
                 function SubPlugin(element, options) {
-                    SubPlugin._super.call(this, element, options);
+                    SubPlugin.__super__.call(this, element, options);
                 }
 
-                $.plugin('subplugin', SubPlugin, {
+                Plugin.create('subplugin', SubPlugin, {
                     _init: function() {
 
                     }
@@ -38,10 +38,10 @@ define([
 
             it('extends sub-object prototype', function() {
                 function SubPlugin(element, options) {
-                    SubPlugin._super.call(this, element, options);
+                    SubPlugin.__super__.call(this, element, options);
                 }
 
-                $.plugin('subplugin', SubPlugin, {
+                Plugin.create('subplugin', SubPlugin, {
                     _init: function() {
 
                     },
@@ -60,10 +60,10 @@ define([
 
             it('extends $.fn with the plugin function', function() {
                 function SubPlugin(element, options) {
-                    SubPlugin._super.call(this, element, options);
+                    SubPlugin.__super__.call(this, element, options);
                 }
 
-                $.plugin('subplugin', SubPlugin, {
+                Plugin.create('subplugin', SubPlugin, {
                     _init: function() {
 
                     }
@@ -74,10 +74,10 @@ define([
 
             it('invokes the _init function when creating the plugin', function(done) {
                 function SubPlugin(element, options) {
-                    SubPlugin._super.call(this, element, options);
+                    SubPlugin.__super__.call(this, element, options);
                 }
 
-                $.plugin('subplugin', SubPlugin, {
+                Plugin.create('subplugin', SubPlugin, {
                     _init: function() {
                         done();
                     }

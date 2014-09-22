@@ -1,16 +1,16 @@
 define([
     '$',
     'plugin'
-], function($) {
+], function($, Plugin) {
     var element;
     var createPlugin = function() {
         SubPlugin.DEFAULTS = {};
 
         function SubPlugin(element, options) {
-            SubPlugin._super.call(this, element, options, SubPlugin.DEFAULTS);
+            SubPlugin.__super__.call(this, element, options, SubPlugin.DEFAULTS);
         }
 
-        $.plugin('subplugin', SubPlugin, {
+        Plugin.create('subplugin', SubPlugin, {
             _init: function(element, options) {
             },
             someMethod: function() {
