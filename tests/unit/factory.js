@@ -126,7 +126,7 @@ define([
 
                 assert.equal(Plugin1.prototype._init, plugin1Init);
                 assert.isDefined(plugin1.options.plugin1Option);
-                assert.isDefined(plugin2.firstUniqueMethod);
+                assert.isDefined(plugin1.firstUniqueMethod);
                 assert.isUndefined(plugin1.secondUniqueMethod);
 
                 assert.equal(Plugin2.prototype._init, plugin2Init);

@@ -25,7 +25,9 @@
     Plugin.create = function(name, SubConstructor, prototype) {
         SubConstructor.__super__ = Plugin;
         for (var key in Plugin.prototype)  {
-            SubConstructor.prototype[key] = Plugin.prototype[key];
+            if (!SubConstructor.prototype[key]) {
+                SubConstructor.prototype[key] = Plugin.prototype[key];
+            }
         }
         SubConstructor.prototype = $.extend(true, SubConstructor.prototype, prototype);
         SubConstructor.prototype.constructor = SubConstructor;
