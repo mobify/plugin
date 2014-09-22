@@ -84,7 +84,39 @@ define([
                 });
 
                 element.subplugin();
-            })
+            });
+        });
+
+        describe('multiple plugin types', function() {
+            it('creates types correctly by extending Plugin.prototype', function() {
+                var plugin1Init = function(element) { var $element1 = element; };
+                var plugin2Init = function(element) { var $element2 = element; };
+
+                function Plugin1(element, options) {
+                    Plugin1.__super__.call(this, element, options, {plugin1Option: true});
+                }
+
+                Plugin.create('plugin1', Plugin1, {
+                    _init: plugin1Init
+                });
+
+                function Plugin2(element, options) {
+                    Plugin1.__super__.call(this, element, options, {plugin2Option: true});
+                }
+
+                Plugin.create('plugin2', Plugin2, {
+                    _init: plugin2Init
+                });
+
+                var $plugin1 = $('<div/>').plugin1();
+                var $plugin2 = $('<div/>').plugin2();
+
+                assert.equal(Plugin1.prototype._init, plugin1Init);
+                assert.isDefined($plugin1.data('plugin1').options.plugin1Option);
+
+                assert.equal(Plugin2.prototype._init, plugin2Init);
+                assert.isDefined($plugin2.data('plugin2').options.plugin2Option);
+            });
         });
     });
 });
