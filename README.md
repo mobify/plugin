@@ -38,7 +38,7 @@ And then require the plugin factory in as needed:
 ```
 define(
     ['$', 'plugin'],
-    function($) {
+    function($, Plugin) {
         // create plugin
     }
 );
@@ -48,7 +48,7 @@ define(
 
 The plugin factory requires a few things to be defined in your plugin prior to calling the plugin factory function.
 
-1. Your plugin's constructor, calling `_super`
+1. Your plugin's constructor, calling `__super__`
 2. A `DEFAULTS` static property on your plugin's constructor
 3. A `VERSION` static property on your plugin's constructor
 
@@ -64,9 +64,9 @@ define(
 		'$',
 		'plugin'
 	],
-	function($) {
+	function($, Plugin) {
 		function Button(element, options) {
-			Button._super.call(this, element, options, Button.DEFAULTS);
+			Button.__super__.call(this, element, options, Button.DEFAULTS);
 		}
 		
 		Button.VERSION = '0.0.1';
@@ -75,7 +75,7 @@ define(
 			cssClass = 'button'
 		};
 		
-		$.plugin('button', Button, {
+		Plugin.create('button', Button, {
 			_init: function(element) {
 			}
 		});
@@ -83,7 +83,7 @@ define(
 )
 ```
 
-First, we declare a `Button` constructor, and VERSION and DEFAULTS properties. We then invoke the static `$.plugin` function. Through prototypal inheritance, this function extends the `Button` prototype with the `Plugin` prototype. Additionally, it creates our Zepto plugin interface. 
+First, we declare a `Button` constructor, and VERSION and DEFAULTS properties. We then invoke the static `Plugin.create` function. Through prototypal inheritance, this function extends the `Button` prototype with the `Plugin` prototype. Additionally, it creates our Zepto plugin interface. 
 
 To create a button instance, you merely need to use:
 
@@ -93,7 +93,7 @@ $('<button></button>').button();
 
 ## The Plugin factory method
 
-Extends a plugin using the `Plugin` prototype. Creates a Zepto plugin interface function.
+Extends a plugin using the `Plugin` prototype.
 
 | Parameter&nbsp;name | Description |
 |----------------|-------------|
