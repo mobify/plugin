@@ -93,29 +93,46 @@ define([
                 var plugin2Init = function(element) { var $element2 = element; };
 
                 function Plugin1(element, options) {
-                    Plugin1.__super__.call(this, element, options, {plugin1Option: true});
+                    Plugin1.__super__.call(this, element, options, {
+                        plugin1Option: true
+                    });
                 }
 
                 Plugin.create('plugin1', Plugin1, {
-                    _init: plugin1Init
+                    _init: plugin1Init,
+                    firstUniqueMethod: function() {
+                        return true;
+                    }
                 });
 
                 function Plugin2(element, options) {
-                    Plugin1.__super__.call(this, element, options, {plugin2Option: true});
+                    Plugin1.__super__.call(this, element, options, {
+                        plugin2Option: true
+                    });
                 }
 
                 Plugin.create('plugin2', Plugin2, {
-                    _init: plugin2Init
+                    _init: plugin2Init,
+                    secondUniqueMethod: function() {
+                        return false;
+                    }
                 });
 
                 var $plugin1 = $('<div/>').plugin1();
                 var $plugin2 = $('<div/>').plugin2();
 
+                var plugin1 = $plugin1.data('plugin1');
+                var plugin2 = $plugin2.data('plugin2');
+
                 assert.equal(Plugin1.prototype._init, plugin1Init);
-                assert.isDefined($plugin1.data('plugin1').options.plugin1Option);
+                assert.isDefined(plugin1.options.plugin1Option);
+                assert.isDefined(plugin2.firstUniqueMethod);
+                assert.isUndefined(plugin1.secondUniqueMethod);
 
                 assert.equal(Plugin2.prototype._init, plugin2Init);
-                assert.isDefined($plugin2.data('plugin2').options.plugin2Option);
+                assert.isDefined(plugin2.options.plugin2Option);
+                assert.isDefined(plugin2.secondUniqueMethod);
+                assert.isUndefined(plugin2.firstUniqueMethod);
             });
         });
     });
