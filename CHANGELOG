@@ -1,2 +1,6 @@
+2.1.0
+    - Exposed Plugin as $ extension method
+2.0.0
+    - Reworked Plugin method to be static invocation
 1.1.0
 	- Added check to determine if _init method is defined on plugin construction

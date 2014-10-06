@@ -9,6 +9,12 @@ define([
             element = $('<div class="subplugin" />');
         });
 
+        describe('Plugin extension', function() {
+            it('exposes Plugin on $ as extension', function() {
+                assert.isDefined($.Plugin);
+            });
+        });
+
         describe('Plugin create', function() {
 
             it('creates create function', function() {
