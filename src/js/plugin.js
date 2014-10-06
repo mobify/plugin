@@ -68,5 +68,7 @@
         noop: function() {}
     });
 
+    $.Plugin = Plugin;
+
     return Plugin;
 }));
