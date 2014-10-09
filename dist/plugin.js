@@ -65,7 +65,14 @@
     };
 
     $.extend($, {
-        noop: function() {}
+        noop: function() {},
+        uuid: (function() {
+            var uuid = 0;
+
+            return function() {
+                return ++uuid;
+            };
+        })()
     });
 
     return Plugin;

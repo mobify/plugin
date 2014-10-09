@@ -12,6 +12,7 @@ define([
 
         Plugin.create('subplugin', SubPlugin, {
             _init: function(element, options) {
+                this.element = $(element);
             },
             someMethod: function() {
                 this._trigger('customEvent');
