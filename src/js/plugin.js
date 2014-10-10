@@ -67,7 +67,7 @@
     $.extend($, {
         noop: function() {},
         uniqueId: function() {
-            return +new Date;
+            return +new Date();
         }
     });
 
