@@ -66,13 +66,9 @@
 
     $.extend($, {
         noop: function() {},
-        uuid: (function() {
-            var uuid = 0;
-
-            return function() {
-                return ++uuid;
-            };
-        })()
+        uniqueId: function() {
+            return +new Date;
+        }
     });
 
     return Plugin;

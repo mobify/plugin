@@ -1,3 +1,5 @@
+2.1.0
+    - Added $.uniqueId function
 2.0.0
     - Reworked plugin to use more factory style static create function
 1.1.0
