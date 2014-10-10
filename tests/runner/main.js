@@ -9,7 +9,8 @@ require(['config'], function() {
 
             var tests = [
                 '../../tests/unit/factory.js',
-                '../../tests/unit/plugin.js'
+                '../../tests/unit/plugin.js',
+                '../../tests/unit/uuid.js'
             ];
 
             require(tests, function() {

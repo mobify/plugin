@@ -65,7 +65,10 @@
     };
 
     $.extend($, {
-        noop: function() {}
+        noop: function() {},
+        uniqueId: function() {
+            return +new Date();
+        }
     });
 
     return Plugin;
