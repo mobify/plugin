@@ -4,7 +4,7 @@
     "type" : "git",
     "url" : "https://github.com/mobify/plugin.git"
   },
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "A generic plugin factory method for creating Mobify plugins",
   "devDependencies": {
     "grunt": "~0.4.x",

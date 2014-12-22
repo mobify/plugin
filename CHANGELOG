@@ -1,3 +1,5 @@
+2.2.0
+    - Throwing Error objects instead of strings on error
 2.1.0
     - Added $.uniqueId function
 2.0.0
