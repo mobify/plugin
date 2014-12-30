@@ -45,7 +45,7 @@
                 // already initialized, we can safely ignore the call.
                 if (!plugin) {
                     if (isMethodCall) {
-                        throw 'cannot call methods on "' + name + '" prior to initialization; attempted to call method "' + option + '"';
+                        throw new Error('cannot call methods on "' + name + '" prior to initialization; attempted to call method "' + option + '"');
                     }
                     $this.data(name, (plugin = new SubConstructor(this, option)));
                 }
@@ -53,7 +53,7 @@
                 // invoke a public method on plugin, and skip private methods
                 if (isMethodCall) {
                     if (option.charAt(0) === '_' || typeof plugin[option] !== 'function') {
-                        throw 'no such method "' + option + '" for "' + name + '"';
+                        throw new Error('no such method "' + option + '" for "' + name + '"');
                     }
 
                     plugin[option].apply(plugin, args.length > 1 ? args.slice(1) : null);

@@ -2,11 +2,11 @@ define([
     '$',
     'plugin'
 ], function($, Plugin) {
-    var element;
+    var $element;
 
     describe('Plugin factory', function() {
         beforeEach(function() {
-            element = $('<div class="subplugin" />');
+            $element = $('<div class="subplugin" />');
         });
 
         describe('Plugin create', function() {
@@ -83,7 +83,7 @@ define([
                     }
                 });
 
-                element.subplugin();
+                $element.subplugin();
             });
         });
 

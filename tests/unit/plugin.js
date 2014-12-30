@@ -2,7 +2,7 @@ define([
     '$',
     'plugin'
 ], function($, Plugin) {
-    var element;
+    var $element;
     var createPlugin = function() {
         SubPlugin.DEFAULTS = {};
 
@@ -23,7 +23,7 @@ define([
 
     describe('Plugin interface', function() {
         beforeEach(function() {
-            element = $('<div class="subplugin" />');
+            $element = $('<div class="subplugin" />');
 
             createPlugin();
         });
@@ -31,38 +31,38 @@ define([
         describe('invoking methods before plugin is initialized', function() {
             it('throws when not initialized', function() {
                 assert.throws(function() {
-                    element.subplugin('someMethod');
-                });
+                    $element.subplugin('someMethod');
+                }, Error);
             });
         });
 
         describe('invoking methods using the plugin interface', function() {
             it('calls customEvent using the someMethod method', function(done) {
-                element.subplugin({
+                $element.subplugin({
                     customEvent: function(e, ui) {
                         done();
                     }
                 });
 
-                element.subplugin('someMethod');
+                $element.subplugin('someMethod');
             });
 
             it('throws for method calls that don\'t exist', function() {
                 assert.throws(function() {
-                    element.subplugin().subplugin('noMethod');
-                });
+                    $element.subplugin().subplugin('noMethod');
+                }, Error);
             });
 
             it('throws when attempting to invoke private methods', function() {
                 assert.throws(function() {
-                    element.subplugin().subplugin('_init');
-                });
+                    $element.subplugin().subplugin('_init');
+                }, Error);
             });
 
             it('throws when attempting to invoke methods that aren\'t functions', function() {
                 assert.throws(function() {
-                    element.subplugin().subplugin('someProperty');
-                });
+                    $element.subplugin().subplugin('someProperty');
+                }, Error);
             });
         });
     });
