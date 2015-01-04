@@ -1,4 +1,4 @@
-(function (factory) {
+(function(factory) {
     if (typeof define === 'function' && define.amd) {
         define([
             '$'
@@ -19,12 +19,12 @@
     }
 
     Plugin.prototype._trigger = function(eventName, data) {
-        eventName in this.options && this.options[eventName].call(this, $.Event(this.name + ':' + eventName, { bubbles: false }), data);
+        eventName in this.options && this.options[eventName].call(this, $.Event(this.name + ':' + eventName, {bubbles: false}), data);
     };
 
     Plugin.create = function(name, SubConstructor, prototype) {
         SubConstructor.__super__ = Plugin;
-        for (var key in Plugin.prototype)  {
+        for (var key in Plugin.prototype) {
             if (!SubConstructor.prototype[key]) {
                 SubConstructor.prototype[key] = Plugin.prototype[key];
             }
@@ -65,7 +65,6 @@
                     !plugin && $this.data(name, (plugin = new SubConstructor(this, option)));
                 });
             }
-
 
             return returnValue;
         };
