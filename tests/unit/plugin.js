@@ -29,6 +29,9 @@ define([
             numMethod: function() {
                 return 42;
             },
+            objMethod: function(obj) {
+                return obj;
+            },
             hello: function(name) {
                 return 'Hello, ' + name;
             },
@@ -95,6 +98,18 @@ define([
 
                 assert.isNumber(returnValue);
                 assert.equal(returnValue, 42);
+
+                $element.subplugin('destroy');
+            });
+
+            it('returns object when calling a method that returns an object', function() {
+                var o = {};
+                $element.subplugin();
+
+                var returnValue = $element.subplugin('objMethod', o);
+
+                assert.isObject(returnValue);
+                assert.equal(returnValue, o);
 
                 $element.subplugin('destroy');
             });
