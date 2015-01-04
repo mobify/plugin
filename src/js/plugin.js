@@ -35,30 +35,39 @@
 
         $.fn[name] = function(option) {
             var args = Array.prototype.slice.call(arguments);
+            var isMethodCall = typeof option === 'string';
+            var returnValue;
 
-            return this.each(function() {
-                var $this = $(this);
-                var plugin = $this.data(name);
-                var isMethodCall = typeof option === 'string';
+            if (isMethodCall) {
+                this.each(function() {
+                    var $this = $(this);
+                    var plugin = $this.data(name);
 
-                // If plugin isn't initialized, we lazy-load initialize it. If it's
-                // already initialized, we can safely ignore the call.
-                if (!plugin) {
-                    if (isMethodCall) {
+                    // We don't allow method calls on plugins that aren't initialized
+                    if (!plugin && isMethodCall) {
                         throw new Error('cannot call methods on "' + name + '" prior to initialization; attempted to call method "' + option + '"');
                     }
-                    $this.data(name, (plugin = new SubConstructor(this, option)));
-                }
 
-                // invoke a public method on plugin, and skip private methods
-                if (isMethodCall) {
+                    // invoke a public method on plugin, and skip private methods
                     if (option.charAt(0) === '_' || typeof plugin[option] !== 'function') {
                         throw new Error('no such method "' + option + '" for "' + name + '"');
                     }
 
-                    plugin[option].apply(plugin, args.length > 1 ? args.slice(1) : null);
-                }
-            });
+                    returnValue = plugin[option].apply(plugin, args.length > 1 ? args.slice(1) : null);
+                });
+            } else {
+                returnValue = this.each(function() {
+                    var $this = $(this);
+                    var plugin = $this.data(name);
+
+                    // If plugin isn't initialized, we lazy-load initialize it.
+                    // If it's already initialized, we can safely ignore the call.
+                    !plugin && $this.data(name, (plugin = new SubConstructor(this, option)));
+                });
+            }
+
+
+            return returnValue;
         };
 
         $.fn[name].Constructor = SubConstructor;
