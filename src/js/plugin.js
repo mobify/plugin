@@ -48,7 +48,7 @@
                         throw new Error('cannot call methods on "' + name + '" prior to initialization; attempted to call method "' + option + '"');
                     }
 
-                    // invoke a public method on plugin, and skip private methods
+                    // Skip private and non-existent methods
                     if (option.charAt(0) === '_' || typeof plugin[option] !== 'function') {
                         throw new Error('no such method "' + option + '" for "' + name + '"');
                     }
