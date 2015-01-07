@@ -44,7 +44,7 @@
                     var plugin = $this.data(name);
 
                     // We don't allow method calls on plugins that aren't initialized
-                    if (!plugin && isMethodCall) {
+                    if (!plugin) {
                         throw new Error('cannot call methods on "' + name + '" prior to initialization; attempted to call method "' + option + '"');
                     }
 
