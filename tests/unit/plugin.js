@@ -12,7 +12,7 @@ define([
 
         Plugin.create('subplugin', SubPlugin, {
             _init: function(element) {
-                this.element = $(element);
+                this.element = $(element).appendTo(document.body).addClass('subplugin');
             },
             destroy: function() {
                 this.element.removeData(this.name);
@@ -69,71 +69,99 @@ define([
                 $element.subplugin('someMethod');
             });
 
-            it('returns string when calling a method that returns a string', function() {
-                $element.subplugin();
+            describe('single element', function() {
+                it('returns string when calling a method that returns a string', function() {
+                    $element.subplugin();
 
-                var returnValue = $element.subplugin('stringMethod');
+                    var returnValue = $element.subplugin('stringMethod');
 
-                assert.isString(returnValue);
-                assert.equal(returnValue, 'string value');
+                    assert.isString(returnValue);
+                    assert.equal(returnValue, 'string value');
 
-                $element.subplugin('destroy');
+                    $element.subplugin('destroy');
+                });
+
+                it('returns bool when calling a method that returns a bool', function() {
+                    $element.subplugin();
+
+                    var returnValue = $element.subplugin('boolMethod');
+
+                    assert.isBoolean(returnValue);
+                    assert.isTrue(returnValue);
+
+                    $element.subplugin('destroy');
+                });
+
+                it('returns number when calling a method that returns a number', function() {
+                    $element.subplugin();
+
+                    var returnValue = $element.subplugin('numMethod');
+
+                    assert.isNumber(returnValue);
+                    assert.equal(returnValue, 42);
+
+                    $element.subplugin('destroy');
+                });
+
+                it('returns object when calling a method that returns an object', function() {
+                    var o = {};
+                    $element.subplugin();
+
+                    var returnValue = $element.subplugin('objMethod', o);
+
+                    assert.isObject(returnValue);
+                    assert.equal(returnValue, o);
+
+                    $element.subplugin('destroy');
+                });
+
+                it('return correct value when a method is invoked that takes a parameter', function() {
+                    $element.subplugin();
+
+                    var returnValue = $element.subplugin('hello', 'Bob');
+
+                    assert.isString(returnValue);
+                    assert.equal(returnValue, 'Hello, Bob');
+
+                    $element.subplugin('destroy');
+                });
+
+                it('return correct value when a method is invoked that takes multiple parameters', function() {
+                    $element.subplugin();
+
+                    var returnValue = $element.subplugin('add', 11, 31);
+
+                    assert.isNumber(returnValue);
+                    assert.equal(returnValue, 42);
+
+                    $element.subplugin('destroy');
+                });
             });
 
-            it('returns bool when calling a method that returns a bool', function() {
-                $element.subplugin();
+            describe('multiple elements', function() {
+                it('returns the original set when a method is invoked', function() {
+                    $('<div />').addClass('multiple').subplugin();
+                    $('<div />').addClass('multiple').subplugin();
+                    $('<div />').addClass('multiple').subplugin();
 
-                var returnValue = $element.subplugin('boolMethod');
+                    var $elements = $('.multiple').subplugin('stringMethod');
 
-                assert.isBoolean(returnValue);
-                assert.isTrue(returnValue);
+                    assert.equal($elements.length, 3);
 
-                $element.subplugin('destroy');
-            });
+                    $elements.remove();
+                });
 
-            it('returns number when calling a method that returns a number', function() {
-                $element.subplugin();
+                it('returns the original set when a method with parameters is invoked', function() {
+                    $('<div />').addClass('multiple').subplugin();
+                    $('<div />').addClass('multiple').subplugin();
+                    $('<div />').addClass('multiple').subplugin();
 
-                var returnValue = $element.subplugin('numMethod');
+                    var $elements = $('.multiple').subplugin('add', 11, 31);
 
-                assert.isNumber(returnValue);
-                assert.equal(returnValue, 42);
+                    assert.equal($elements.length, 3);
 
-                $element.subplugin('destroy');
-            });
-
-            it('returns object when calling a method that returns an object', function() {
-                var o = {};
-                $element.subplugin();
-
-                var returnValue = $element.subplugin('objMethod', o);
-
-                assert.isObject(returnValue);
-                assert.equal(returnValue, o);
-
-                $element.subplugin('destroy');
-            });
-
-            it('return correct value when a method is invoked that takes a parameter', function() {
-                $element.subplugin();
-
-                var returnValue = $element.subplugin('hello', 'Bob');
-
-                assert.isString(returnValue);
-                assert.equal(returnValue, 'Hello, Bob');
-
-                $element.subplugin('destroy');
-            });
-
-            it('return correct value when a method is invoked that takes multiple parameters', function() {
-                $element.subplugin();
-
-                var returnValue = $element.subplugin('add', 11, 31);
-
-                assert.isNumber(returnValue);
-                assert.equal(returnValue, 42);
-
-                $element.subplugin('destroy');
+                    $elements.remove();
+                });
             });
         });
 

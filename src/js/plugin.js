@@ -36,7 +36,8 @@
         $.fn[name] = function(option) {
             var args = Array.prototype.slice.call(arguments);
             var isMethodCall = typeof option === 'string';
-            var returnValue;
+            var isSingleElement = this.length === 1;
+            var returnValue = this;
 
             if (isMethodCall) {
                 this.each(function() {
@@ -53,7 +54,11 @@
                         throw new Error('no such method "' + option + '" for "' + name + '"');
                     }
 
-                    returnValue = plugin[option].apply(plugin, args.length > 1 ? args.slice(1) : null);
+                    var result = plugin[option].apply(plugin, args.length > 1 ? args.slice(1) : null);
+
+                    if (isSingleElement) {
+                        returnValue = result;
+                    }
                 });
             } else {
                 returnValue = this.each(function() {
