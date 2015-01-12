@@ -1,3 +1,5 @@
+3.0.0
+    - Fixing the way methods are invoked via the plugin interface
 2.2.0
     - Throwing Error objects instead of strings on error
 2.1.0
