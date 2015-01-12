@@ -105,9 +105,9 @@ See the example above for usage.
 
 ## Invoking methods on a plugin.
 
-The plugin factory facilitates calling methods via the plugin interface. This means that once a plugin is initialized, public methods can be invoked by passing the name of the method as the first parameter to the plugin.
+The plugin factory facilitates invoking methods via the plugin interface. This means that once a plugin is initialized, public methods can be invoked by passing the name of the method as the first parameter to the plugin function.
 
-Public methods are methods defined on the object passed into the `Plugin.create` factory method that aren't preceded by an underscore character. Methods preceded by an underscore are considered private methods.
+Public methods are methods defined on the object passed into the `Plugin.create` factory method that aren't preceded by an *underscore* character. Methods preceded by an *underscore* are considered private methods.
 
 Using our `button` example above, here's what public methods would look like:
 
@@ -154,9 +154,11 @@ var $button = $('<button />').button();
 $button.button('disable');
 ```
 
-It's important to note that there's some specific behaviour around invoking methods when using a single element vs. a set of elements.
+### Method return values
 
-When invoking a method against a single element, and when that method returns a value, the value will be correctly returned as expected.
+It's important to note that there's some specific behaviour around invoking methods that return a value when using a single element vs. a set of elements.
+
+When invoking a method against a single element, and when that method returns a value, the value will be returned as expected.
 
 ```
 var $button = $('<button />').button();
