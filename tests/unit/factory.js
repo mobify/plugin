@@ -20,7 +20,7 @@ define([
             });
         });
 
-        describe('Plugin creation', function() {
+        describe('Plugin creation with single depth inheritance', function() {
             it('extends sub-object prototype with the name property', function() {
                 function SubPlugin(element, options) {
                     SubPlugin.__super__.call(this, element, options);
@@ -84,6 +84,150 @@ define([
                 });
 
                 $element.subplugin();
+            });
+        });
+
+        describe('Plugin creation with three level deep inheritance', function() {
+            it('extends sub-object prototype with the name property', function() {
+                function SuperPlugin(element, options) {
+                    SuperPlugin.__super__.call(this, element, options);
+                }
+
+                Plugin.create('superplugin', SuperPlugin, {
+                    _init: function() {
+
+                    }
+                });
+
+                function SubPlugin(element, options) {
+                    SuperPlugin.__super__.call(this, element, options);
+                }
+
+                Plugin.create('subplugin', SubPlugin, SuperPlugin, {
+                    _init: function() {
+
+                    }
+                });
+
+                assert.isDefined(SubPlugin.prototype.name);
+                assert.equal(SubPlugin.prototype.name, 'subplugin');
+            });
+
+            it('extends sub-object prototype', function() {
+                function SuperPlugin(element, options) {
+                    SuperPlugin.__super__.call(this, element, options);
+                }
+
+                Plugin.create('superplugin', SuperPlugin, {
+                    _init: function() {},
+                    superMethod: function() {}
+                });
+
+                function SubPlugin(element, options) {
+                    SubPlugin.__super__.call(this, element, options);
+                }
+
+                Plugin.create('subplugin', SubPlugin, SuperPlugin, {
+                    _init: function() {
+
+                    },
+                    foo: function() {
+
+                    },
+                    bar: function() {
+
+                    }
+                });
+
+                assert.isDefined(SubPlugin.prototype._init);
+                assert.isDefined(SubPlugin.prototype.foo);
+                assert.isDefined(SubPlugin.prototype.bar);
+                assert.isDefined(SubPlugin.prototype.superMethod);
+            });
+        });
+
+        describe('Plugin creation with four level deep inheritance', function() {
+            it('extends sub-object prototype with the name property', function() {
+                function Level2Plugin(element, options) {
+                    Level2Plugin.__super__.call(this, element, options);
+                }
+
+                Plugin.create('level2plugin', Level2Plugin, {
+                    _init: function() {
+
+                    },
+                    level2Method: function() {}
+                });
+
+                function Level3Plugin(element, options) {
+                    Level3Plugin.__super__.call(this, element, options);
+                }
+
+                Plugin.create('level3plugin', Level3Plugin, Level2Plugin, {
+                    _init: function() {
+
+                    },
+                    level3Method: function() {}
+                });
+
+                function SubPlugin(element, options) {
+                    SuperPlugin.__super__.call(this, element, options);
+                }
+
+                Plugin.create('subplugin', SubPlugin, Level3Plugin, {
+                    _init: function() {
+
+                    }
+                });
+
+                assert.isDefined(SubPlugin.prototype.name);
+                assert.equal(SubPlugin.prototype.name, 'subplugin');
+            });
+
+            it('extends sub-object prototype', function() {
+                function Level2Plugin(element, options) {
+                    Level2Plugin.__super__.call(this, element, options);
+                }
+
+                Plugin.create('level2plugin', Level2Plugin, {
+                    _init: function() {
+
+                    },
+                    level2Method: function() {}
+                });
+
+                function Level3Plugin(element, options) {
+                    Level3Plugin.__super__.call(this, element, options);
+                }
+
+                Plugin.create('level3plugin', Level3Plugin, Level2Plugin, {
+                    _init: function() {
+
+                    },
+                    level3Method: function() {}
+                });
+
+                function SubPlugin(element, options) {
+                    SubPlugin.__super__.call(this, element, options);
+                }
+
+                Plugin.create('subplugin', SubPlugin, Level3Plugin, {
+                    _init: function() {
+
+                    },
+                    foo: function() {
+
+                    },
+                    bar: function() {
+
+                    }
+                });
+
+                assert.isDefined(SubPlugin.prototype._init);
+                assert.isDefined(SubPlugin.prototype.foo);
+                assert.isDefined(SubPlugin.prototype.bar);
+                assert.isDefined(SubPlugin.prototype.level2Method);
+                assert.isDefined(SubPlugin.prototype.level3Method);
             });
         });
 
