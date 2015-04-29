@@ -22,11 +22,16 @@
         eventName in this.options && this.options[eventName].call(this, $.Event(this.name + ':' + eventName, {bubbles: false}), data);
     };
 
-    Plugin.create = function(name, SubConstructor, prototype) {
-        SubConstructor.__super__ = Plugin;
-        for (var key in Plugin.prototype) {
+    Plugin.create = function(name, SubConstructor, SuperConstructor, prototype) {
+        if (typeof prototype === 'undefined') {
+            prototype = SuperConstructor;
+            SuperConstructor = Plugin;
+        }
+
+        SubConstructor.__super__ = SuperConstructor;
+        for (var key in SuperConstructor.prototype) {
             if (!SubConstructor.prototype[key]) {
-                SubConstructor.prototype[key] = Plugin.prototype[key];
+                SubConstructor.prototype[key] = SuperConstructor.prototype[key];
             }
         }
         SubConstructor.prototype = $.extend(true, SubConstructor.prototype, prototype);
