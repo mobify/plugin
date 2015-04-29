@@ -4,7 +4,7 @@
     "type": "git",
     "url": "https://github.com/mobify/plugin.git"
   },
-  "version": "3.0.0",
+  "version": "3.1.0",
   "description": "A generic plugin factory method for creating Mobify plugins",
   "devDependencies": {
     "chai": "~1.9.0",
