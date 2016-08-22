@@ -4,7 +4,7 @@
             '$'
         ], factory);
     } else {
-        var framework = window.Zepto || window.jQuery;
+        var framework = window.jQuery;
         window.Plugin = factory(framework);
     }
 }(function($) {
