@@ -1,10 +1,10 @@
 {
-  "name": "plugin",
+  "name": "mobify-plugin",
   "repository": {
     "type": "git",
-    "url": "https://github.com/mobify/plugin.git"
+    "url": "git+https://github.com/mobify/plugin.git"
   },
-  "version": "3.1.0",
+  "version": "4.0.0",
   "description": "A generic plugin factory method for creating Mobify plugins",
   "devDependencies": {
     "chai": "~1.9.0",
@@ -28,7 +28,25 @@
     "mobify-code-style": "0.0.3",
     "mocha": "~1.14.0",
     "requirejs": "2.2.0",
-    "text": "requirejs/text"
+    "text": "github:requirejs/text"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mobify/plugin/issues"
+  },
+  "homepage": "https://github.com/mobify/plugin#readme",
+  "main": "Gruntfile.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "./node_modules/.bin/grunt test"
+  },
+  "keywords": [
+    "plugin",
+    "factory",
+    "generic",
+    "mobify"
+  ],
+  "author": "Mobify"
 }
