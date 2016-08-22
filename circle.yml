@@ -2,8 +2,10 @@ machine:
   node:
     version: 0.10.21
 
-test:
-    pre:
-        - bower install
+dependencies:
     override:
-        - grunt test 
+        - npm install
+
+test:
+    override:
+        - npm test
