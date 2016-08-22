@@ -1,8 +1,9 @@
 Mobify Plugin Factory
-======
+===
 
 A generic plugin factory method for creating Mobify plugins.
 
+[![NPM](https://nodei.co/npm/mobify-plugin.png?downloads=true&stars=true)](https://nodei.co/npm/mobify-plugin/)
 [![Circle CI](https://circleci.com/gh/mobify/plugin/tree/master.png?style=shield&circle-token=9347fa0140425cd2d9098cfcf58f3dfd54ccdca5)](https://circleci.com/gh/mobify/plugin/tree/master)
 
 ## Requirements
@@ -11,21 +12,21 @@ A generic plugin factory method for creating Mobify plugins.
 
 ## Installation
 
-The plugin factory can be installed using bower:
+The plugin factory can be installed using NPM:
 
 ```
-bower install plugin
+npm install mobify-plugin
 ```
 
 ## Usage with Require.js
 
-To use with require.js, after installing through bower you merely have to reference the plugin factory in your require config file:
+To use with require.js, after installing through NPM you merely have to reference the plugin factory in your require config file:
 
 ```config.js
 
 {
     'paths': {
-        'plugin': 'bower_components/plugin/dist/plugin.min',
+        'plugin': 'node_modules/mobify-plugin/dist/plugin.min',
         'myPlugin': 'plugins/myPlugin'
     }
 }
