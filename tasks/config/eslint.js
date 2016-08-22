@@ -7,7 +7,7 @@ module.exports = function(grunt) {
         src: lintingTargets,
         options: {
             reset: true,
-            configFile: './.eslintrc.yml'
+            configFile: require.resolve('mobify-code-style/javascript/.eslintrc')
         }
     };
 };
