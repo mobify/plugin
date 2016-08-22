@@ -26,7 +26,9 @@
     "grunt-version": "^0.3.0",
     "jshint": "2.5.0",
     "mobify-code-style": "0.0.3",
-    "mocha": "~1.14.0"
+    "mocha": "~1.14.0",
+    "requirejs": "2.2.0",
+    "text": "requirejs/text"
   },
   "license": "MIT"
 }
