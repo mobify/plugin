@@ -1,3 +1,10 @@
+4.0.0
+    - Prepares Plugin for NPM
+    - Removes Bower
+    - Removes Zepto in favour of jQuery
+    - Pins NPM deps
+    - Migrate source code linting to eslint
+    - Cleans up LICENSE, README, and package.json
 3.1.0
     - Added capability for multi-level inheritance
 3.0.0
