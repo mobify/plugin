@@ -46,9 +46,11 @@ module.exports = function(grunt) {
         }
     });
 
+    grunt.registerTask('lint', ['eslint']);
+
     grunt.registerTask('serve', ['build', 'connect:server', 'watch']);
-    grunt.registerTask('build', ['lint:dev', 'copy', 'uglify', 'version:all']);
-    grunt.registerTask('release', ['lint:dev', 'test', 'shell:tagRelease']);
+    grunt.registerTask('build', ['lint', 'copy', 'uglify', 'version:all']);
+    grunt.registerTask('release', ['lint', 'test', 'shell:tagRelease']);
     grunt.registerTask('test', ['build', 'connect:test', 'mocha_phantomjs']);
     grunt.registerTask('test:browser', ['build', 'concurrent:tests']);
     grunt.registerTask('default', 'build');

@@ -7,8 +7,8 @@
         var framework = window.jQuery;
         window.Plugin = factory(framework);
     }
-}(function($) {
-    function Plugin(element, options, defaultOptions) {
+})(function($) {
+    var Plugin = function(element, options, defaultOptions) {
         this.options = $.extend(true, {}, defaultOptions, options);
 
         if (typeof this._init !== 'function') {
@@ -16,10 +16,10 @@
         }
 
         this._init(element);
-    }
+    };
 
     Plugin.prototype._trigger = function(eventName, data) {
-        eventName in this.options && this.options[eventName].call(this, $.Event(this.name + ':' + eventName, {bubbles: false}), data);
+        eventName in this.options && this.options[eventName].call(this, $.Event(this.name + ':' + eventName, {bubbles: false}), data); // eslint-disable-line
     };
 
     Plugin.create = function(name, SubConstructor, SuperConstructor, prototype) {
@@ -90,4 +90,4 @@
     });
 
     return Plugin;
-}));
+});
