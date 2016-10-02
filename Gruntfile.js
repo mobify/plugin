@@ -33,7 +33,6 @@ module.exports = function(grunt) {
         'grunt-contrib-connect',
         'grunt-concurrent',
         'grunt-open',
-        'grunt-shell',
         'grunt-contrib-clean',
         'grunt-contrib-copy',
         'grunt-mocha-phantomjs'
