@@ -33,11 +33,9 @@ module.exports = function(grunt) {
         'grunt-contrib-connect',
         'grunt-concurrent',
         'grunt-open',
-        'grunt-shell',
         'grunt-contrib-clean',
         'grunt-contrib-copy',
-        'grunt-mocha-phantomjs',
-        'grunt-version'
+        'grunt-mocha-phantomjs'
     ];
 
     npmTasks.forEach(function(taskName) {
@@ -46,9 +44,10 @@ module.exports = function(grunt) {
         }
     });
 
+    grunt.registerTask('lint', ['eslint']);
+
     grunt.registerTask('serve', ['build', 'connect:server', 'watch']);
-    grunt.registerTask('build', ['lint:dev', 'copy', 'uglify', 'version:all']);
-    grunt.registerTask('release', ['lint:dev', 'test', 'shell:tagRelease']);
+    grunt.registerTask('build', ['lint', 'copy', 'uglify']);
     grunt.registerTask('test', ['build', 'connect:test', 'mocha_phantomjs']);
     grunt.registerTask('test:browser', ['build', 'concurrent:tests']);
     grunt.registerTask('default', 'build');

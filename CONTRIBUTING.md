@@ -17,27 +17,25 @@ git clone https://github.com/your-username/plugin.git
 Ensure the tests pass:
 
 ```
-grunt test
+npm test
 ```
-	
+
 Make your changes, add tests for your changes, then run the tests again:
 
 ```
-grunt test
+npm test
 ```
 
 ### Building a release
 
 Releases are built into the `dist` directory. To build a release, do the following:
 
-Increment the version number in the package.json file according to the [semver](http://semver.org/) specification.
+Increment the version number in the `package.json` file according to the [semver](http://semver.org/) specification.
 
 Run the following `grunt` task to build the dist:
 
 ```
-grunt build-dist
+grunt build
 ```
 
-Push to your fork, and open a [pull request](https://github.com/mobify/plugin/compare). Please ensure you describe your changes in your pull request, as they have a higher liklihood of being merged. 
-
-
+Push to your fork, and open a [pull request](https://github.com/mobify/plugin/compare). Please ensure you describe your changes in your pull request, as they have a higher likelihood of being merged.
